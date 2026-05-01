@@ -1,0 +1,187 @@
+/* ─────────────────────────────────────────────────────────────
+   Global + sketch design system.
+   The `.wf-*` classes are ported from the wireframe bundle's
+   `wireframe-primitives.jsx` injected stylesheet so the real app
+   keeps the chosen hand-drawn aesthetic.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --wf-ink: #1f1b15;
+  --wf-ink2: rgba(31, 27, 21, 0.55);
+  --wf-ink3: rgba(31, 27, 21, 0.32);
+  --wf-paper: #f0eee9;
+  --wf-panel: #e7e3da;
+  --wf-accent: #c96442;
+  --wf-accent-soft: rgba(201, 100, 66, 0.18);
+
+  --font-hand: 'Caveat', 'Patrick Hand', 'Architects Daughter', cursive;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: var(--wf-paper);
+  color: var(--wf-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+/* hide scrollbars inside scene/scroll regions to keep the sketch clean */
+.wf-noscroll::-webkit-scrollbar {
+  display: none;
+}
+.wf-noscroll {
+  scrollbar-width: none;
+}
+
+/* The artboard surface — fills the viewport in the real app. */
+.wf-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--wf-paper);
+  color: var(--wf-ink);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+.wf-hand {
+  font-family: var(--font-hand);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.wf-mono {
+  font-family: var(--font-mono);
+}
+.wf-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--wf-ink2);
+}
+.wf-note {
+  font-family: var(--font-hand);
+  font-size: 18px;
+  color: var(--wf-ink2);
+  line-height: 1.15;
+}
+.wf-anno {
+  font-family: var(--font-hand);
+  font-size: 17px;
+  color: var(--wf-accent);
+  line-height: 1.05;
+}
+
+.wf-hatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(31, 27, 21, 0.07) 0 1px,
+    transparent 1px 7px
+  );
+}
+
+.wf-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1.4px solid var(--wf-ink);
+  border-radius: 99px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  background: var(--wf-paper);
+  color: var(--wf-ink);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.wf-pill:hover {
+  background: rgba(31, 27, 21, 0.06);
+}
+.wf-pill.wf-active {
+  background: var(--wf-accent);
+  color: #fff;
+  border-color: var(--wf-accent);
+}
+.wf-pill.wf-active:hover {
+  background: var(--wf-accent);
+}
+
+.wf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border: 1.2px solid var(--wf-ink3);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--wf-ink2);
+  background: transparent;
+}
+
+.wf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1.6px solid var(--wf-ink);
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--wf-ink);
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.12s, opacity 0.12s;
+}
+.wf-btn:hover {
+  transform: translateY(-1px);
+}
+.wf-btn:active {
+  transform: translateY(0);
+}
+.wf-btn.wf-ghost {
+  background: transparent;
+  color: var(--wf-ink);
+}
+.wf-btn.wf-accent {
+  background: var(--wf-accent);
+  border-color: var(--wf-accent);
+  color: #fff;
+}
+
+/* Interactive control affordances */
+.wf-dial {
+  cursor: ns-resize;
+  outline: none;
+  touch-action: none;
+}
+.wf-dial:focus-visible .wf-dial-rim {
+  stroke: var(--wf-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
